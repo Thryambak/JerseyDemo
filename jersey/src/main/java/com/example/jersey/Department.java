@@ -6,14 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @XmlRootElement
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Department {
-
-
-	private String departmentName;
-	private int departmentId;
-	
+public class Department	{
+private String departmentName;
+private int departmentId;
 }
