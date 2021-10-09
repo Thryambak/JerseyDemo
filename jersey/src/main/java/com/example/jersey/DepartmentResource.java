@@ -2,8 +2,11 @@ package com.example.jersey;
 
 
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -18,20 +21,21 @@ public class DepartmentResource {
 	public java.util.List<Department> getDepartments() throws Exception{
 		return departmentRepository.getAllDepartments();
 	}
-//	@Path("addNew")
-//	@POST
-//	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-//	public Department addDepartment(Department department){
-//	System.out.println(department.toString());
-//	return departmentRepository.addDepartment(department);
-//	}
-//	
-//	@Path("getById/{id}")
-//	@GET
-//	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
-//	public Department getById(@PathParam("id") int id){
-//		return departmentRepository.getDepartmentById(id);
-//	}
+	@Path("addNew")
+	@POST
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Department addDepartment(Department department) throws Exception{
+	System.out.println(department.toString());
+	return departmentRepository.addDepartment(department);
+	}
+	
+	@Path("getById/{id}")
+	@GET
+	@Produces({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public Department getById(@PathParam("id") int id) throws Exception{
+		return departmentRepository.getDepartmentById(id);
+	}
 //	
 //	@Path("updateById/{id}")
 //	@PUT

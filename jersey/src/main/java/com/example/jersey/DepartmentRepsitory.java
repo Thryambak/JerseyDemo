@@ -1,6 +1,7 @@
 package com.example.jersey;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -52,18 +53,33 @@ public class DepartmentRepsitory {
 	
 	}
 
-//	public Department addDepartment(Department department) {
-//		departments.add(department);
-//		return department;
-//	}
-//
-//	public Department getDepartmentById(int id) {
-//		for(Department department:departments){
-//			if(department.getDepartmentId()==id)
-//				return department;
-//		}
-//		return new Department();
-//	}
+	public Department addDepartment(Department department) throws Exception {
+		
+		String 	sql ="insert into departments values (?,?)";
+		
+		
+		PreparedStatement statement = con.prepareStatement(sql);
+		statement.setInt(1,department.getDepartmentId());
+		statement.setString(2, department.getDepartmentName());
+		statement.executeUpdate();
+		return department;
+	}
+
+	public Department getDepartmentById(int id) throws Exception {
+		Statement statement =  con.createStatement();
+		ResultSet rSet = statement.executeQuery("select * FROM departments");
+		
+		while(rSet.next()){
+			Department myDepartment = new Department(rSet.getString(2),rSet.getInt(1));
+			if (myDepartment.getDepartmentId()==id ) {
+				return myDepartment;
+			}
+
+			
+			
+		}
+		return new Department();
+	}
 //
 //	public Department updateByDepartmentId(int id,Department department) {
 //		ListIterator<Department> iterator = departments.listIterator();
