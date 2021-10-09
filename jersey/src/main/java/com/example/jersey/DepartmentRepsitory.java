@@ -80,31 +80,26 @@ public class DepartmentRepsitory {
 		}
 		return new Department();
 	}
-//
-//	public Department updateByDepartmentId(int id,Department department) {
-//		ListIterator<Department> iterator = departments.listIterator();
-//		while(iterator.hasNext()){
-//			Department department2 = iterator.next();
-//			if(department2.getDepartmentId()==id){
-//				iterator.set(department);
-//				return department;
-//			}
-//		}
-//		return new Department();
-//	}
-//
-//	public Department deleteById(int id) {
-//		ListIterator<Department> listIterator = departments.listIterator();
-//		while(listIterator.hasNext()){
-//			Department departments2 =listIterator.next();
-//			if( departments2.getDepartmentId()==id){
-//				listIterator.remove();
-//				return departments2;
-//			}
-//		}
-//		return new Department();
-//	}
-//	
+
+	public Department updateByDepartmentId(int id,Department department) throws Exception {
+		
+		String sql = "Update departments set departmentId = ?, departmentName = ? where departmentId = ?";
+		PreparedStatement statement = con.prepareStatement(sql);
+		statement.setInt(1, department.getDepartmentId());
+		statement.setString(2, department.getDepartmentName());
+		statement.setInt(3, id);
+		statement.executeUpdate();
+		
+		return  department;
+	}
+
+	public String deleteById(int id) throws Exception {
+		String sql ="DELETE FROM departments where departmentId = "+id;
+		Statement statement = con.createStatement();
+		statement.executeUpdate(sql);
+		return "Success";	
+	}
+	
 	
 
 }
